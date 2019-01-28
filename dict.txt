@@ -1,0 +1,32 @@
+# Microsoft
+microsoftonline
+apim
+
+# Azure Regions
+westcentralus
+westus
+
+# Cognitive Services
+cognitiveservices
+contentmoderator
+autosuggest
+bingapis
+
+# Common Engineering
+regex
+uuid
+int64
+int32
+enqueue
+odata
+oauth2
+nullable
+etag
+untagged
+pageable
+
+# Domain Specific Engineering
+point2d
+rect
+unk
+tokenized

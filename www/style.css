@@ -1,0 +1,19 @@
+#error-list {
+    max-height: 1024px;
+    overflow: scroll;
+}
+
+#json-display {
+    max-height: 1024px;
+    min-height: 50px;
+    border-radius: .25rem;
+}
+
+footer {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+footer p {
+  margin-bottom: .25rem;
+}

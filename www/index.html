@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="typoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Swagger Tpyo Finder</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
+
+    <link rel="stylesheet" href="json-viewer.css">
+    <script src="json-viewer.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+
+
+<header>
+    <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-7 py-4">
+                    <h4 class="text-white">About</h4>
+                    <p class="text-muted">A swagger
+                        <del>tpyo</del>
+                        typo finder based on <a href="https://www.python.org/">Python 3</a>, <a
+                                href="https://www.nltk.org/">NLTK</a> and <a
+                                href="https://nlp.stanford.edu/projects/glove/">GloVe</a>.
+                    </p>
+                </div>
+                <div class="col-sm-4 offset-md-1 py-4">
+                    <ul class="list-unstyled">
+                        <li><a href="https://github.com/yangyuan/typo" class="text-white">Source Code</a></li>
+                        <li><a href="https://www.nltk.org/" class="text-white">NLTK</a></li>
+                        <li><a href="https://nlp.stanford.edu/projects/glove/" class="text-white">GloVe</a></li>
+                        <li><a href="https://azure.microsoft.com/en-us/services/cognitive-services/" class="text-white">Cognitive
+                            Services</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+                <svg width="20" height="20" viewBox="0 0 310.42 310.42">
+                    <path d="M273.587,214.965c49.11-49.111,49.109-129.021,0-178.132c-49.111-49.111-129.02-49.111-178.13,0    C53.793,78.497,47.483,140.462,76.51,188.85c0,0,2.085,3.498-0.731,6.312c-16.065,16.064-64.263,64.263-64.263,64.263    c-12.791,12.79-15.836,30.675-4.493,42.02l1.953,1.951c11.343,11.345,29.229,8.301,42.019-4.49c0,0,48.096-48.097,64.128-64.128    c2.951-2.951,6.448-0.866,6.448-0.866C169.958,262.938,231.923,256.629,273.587,214.965z M118.711,191.71    c-36.288-36.288-36.287-95.332,0.001-131.62c36.288-36.287,95.332-36.288,131.619,0c36.288,36.287,36.288,95.332,0,131.62    C214.043,227.996,155,227.996,118.711,191.71z"
+                          style="fill: rgb(255, 255, 255);"></path>
+                    <path d="M126.75,118.424c-1.689,0-3.406-0.332-5.061-1.031c-6.611-2.798-9.704-10.426-6.906-17.038     c17.586-41.559,65.703-61.062,107.261-43.476c6.611,2.798,9.704,10.426,6.906,17.038c-2.799,6.612-10.425,9.703-17.039,6.906     c-28.354-11.998-61.186,1.309-73.183,29.663C136.629,115.445,131.815,118.424,126.75,118.424z"
+                          style="fill: rgb(255, 255, 255);"></path>
+                </svg>
+                <span>&nbsp;&nbsp;</span>
+                <strong>Swagger Tpyo Finder</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
+                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="container" ng-controller="TypoController as typo">
+    <div class="row my-4">
+        <div class="col-6 pl-0 pr-1">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="">URL of Swagger</span>
+                </div>
+                <input type="text" class="form-control" id="swagger_url" ng-model="typo.swagger_url">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" ng-click="typo.validateUrl()">Validate
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 pl-1 pr-0">
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="swagger-file">
+                    <label class="custom-file-label" for="swagger-file">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" ng-click="typo.validateFile()">Validate
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9 px-0">
+            <pre id="json-display" class="json-editor-blackbord">{}</pre>
+        </div>
+
+        <div class="col-md-3 px-0 pl-1">
+            <div class="list-group" id="error-list">
+                <a href="#" class="list-group-item list-group-item-success"
+                   ng-show="!typo.errors.length&&!typo.loading">Typo Free!</a>
+                <a href="#" class="list-group-item list-group-item-warning" ng-show="!typo.errors.length&&typo.loading">Loading
+                    Typos...</a>
+                <a ng-repeat="error in typo.errors" href="#{{ typo.linkToError(error) }}"
+                   class="list-group-item">{{ error['typo'] }}</a>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="typo.share_url!==''">
+        <div class="col-md-12">
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Share Link</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" readonly="readonly" ng-model="typo.share_url">
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a href="#">Back to top</a>
+        </p>
+        <p>A swagger
+            <del>tpyo</del>
+            typo finder based on <a href="https://www.python.org/">Python 3</a>, <a
+                    href="https://www.nltk.org/">NLTK</a> and <a
+                    href="https://nlp.stanford.edu/projects/glove/">GloVe</a>.
+        </p>
+    </div>
+</footer>
+</body>
+</html>
