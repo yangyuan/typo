@@ -66,7 +66,8 @@ class Validator:
             pass
         else:
             print(type(obj))
-            raise Exception()
+            pass
+            # raise Exception()
 
     def _validate_string(self, path, value, value_is_key=False):
         """
