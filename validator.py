@@ -60,6 +60,8 @@ class Validator:
             pass
         elif isinstance(obj, int):
             pass
+        elif isinstance(obj, float):
+            pass
         elif isinstance(obj, type(None)):
             pass
         else:
